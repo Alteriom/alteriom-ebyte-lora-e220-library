@@ -5,6 +5,51 @@ All notable changes to the Alteriom EByte LoRa E220 Series Library will be docum
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.6] - 2025-09-29
+
+### Added
+- **🚀 World-Class Doxygen Documentation System**
+  - Complete Doxygen configuration with modern standards (Doxyfile)
+  - Automated documentation generation workflow (.github/workflows/documentation.yml)
+  - GitHub Pages deployment for live documentation site
+  - 100% API coverage with comprehensive examples already existed
+  - Interactive examples with working Arduino sketches
+  - Platform-specific documentation (Arduino, ESP32, STM32, Pi Pico)
+
+- **🔧 Arduino Library Manager Automation**
+  - Automated submission workflow for Arduino Library Registry
+  - Smart detection of existing submissions in registry
+  - Arduino indexer log monitoring and status tracking
+  - Complete submission process documentation
+
+### Fixed
+- **📱 Arduino Library Manager Owner Display**
+  - Updated library.json maintainer information to show Alteriom as current maintainer
+  - Fixed ownership attribution in Arduino Library Manager
+  - Enhanced author attribution while preserving original author credit
+
+### Enhanced
+- **📚 Documentation Infrastructure**
+  - Enhanced README with comprehensive documentation section
+  - Added live documentation badges and links
+  - Created comprehensive documentation improvements guide
+  - Future enhancement roadmap and recommendations
+  - Automated quality validation and example checking
+
+### Documentation
+- Added docs/DOCUMENTATION_IMPROVEMENTS.md with complete implementation guide
+- Updated README with live documentation links and features
+- Enhanced package descriptions to highlight documentation improvements
+- Added comprehensive automation summary (ARDUINO_AUTOMATION_SUMMARY.md)
+
+### Technical
+- VERSION: comment added to LoRa_E220.h for validation script compatibility
+- All version numbers synchronized across library files
+- Enhanced CI/CD with documentation generation and deployment
+
+This release establishes industry-leading documentation standards and automation,
+making the library accessible to developers from beginner to expert level.
+
 ## [1.1.5] - 2025-09-29
 
 ### Fixed
