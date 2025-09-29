@@ -5,6 +5,16 @@ All notable changes to the Alteriom EByte LoRa E220 Series Library will be docum
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.3] - 2025-09-29
+
+### Fixed
+- Resolved NPM publishing workflow issue - v1.1.2 used old workflow version with `npm ci`
+- Updated validation scripts to properly reference files in docs/ directory
+- Ensured release workflow uses current version with fixed NPM publishing
+
+### Note
+This release ensures the corrected NPM publishing workflow is used, as GitHub Actions workflows are locked to the version when the tag was created.
+
 ## [1.1.2] - 2025-09-29
 
 ### Fixed
