@@ -22,7 +22,7 @@ jobs:
     continue-on-error: true  # Don't fail if wiki update fails
     
     permissions:
-      contents: read
+      contents: write  # Need write permission for wiki
       
     steps:
     - name: Checkout code
@@ -41,6 +41,9 @@ jobs:
         VERSION=$(grep "version=" library.properties | cut -d'=' -f2)
         echo "📋 Current library version: $VERSION"
         
+        # Configure git with token for authentication
+        git config --global url."https://${{ secrets.GITHUB_TOKEN }}@github.com/".insteadOf "https://github.com/"
+        
         # Try to clone the wiki repository
         if git clone https://github.com/${{ github.repository }}.wiki.git wiki 2>/dev/null; then
           echo "✅ Wiki repository exists"
@@ -50,7 +53,7 @@ jobs:
           mkdir -p wiki
           cd wiki
           git init
-          git remote add origin https://github.com/${{ github.repository }}.wiki.git
+          git remote add origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
           
           # Create initial Home page to initialize the wiki
           cat > Home.md << 'EOF'
@@ -103,9 +106,10 @@ jobs:
         # Ensure we're in the wiki directory
         cd wiki || exit 0
         
-        # Configure git
+        # Configure git with authentication
         git config user.name "GitHub Action"
         git config user.email "action@github.com"
+        git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.wiki.git
         
         # Pull latest changes
         git pull origin master 2>/dev/null || true
@@ -457,8 +461,9 @@ jobs:
           
           # Push changes
           git push origin master || {
-            echo "⚠️  Could not push wiki updates. This might be normal if wiki doesn't exist yet."
-            exit 0
+            echo "⚠️  Could not push wiki updates. Check repository wiki permissions."
+            echo "   Wiki pages were created locally but couldn't be pushed to GitHub."
+            exit 1
           }
           
           echo "✅ Wiki updated successfully!"
