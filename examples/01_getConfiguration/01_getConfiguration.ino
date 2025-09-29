@@ -33,12 +33,7 @@
 
 // ---------- Arduino pins --------------
 #ifdef ACTIVATE_SOFTWARE_SERIAL
-#ifdef ACTIVATE_SOFTWARE_SERIAL
 LoRa_E220 e220ttl(4, 5, 3, 7, 6); // Arduino RX <-- e220 TX, Arduino TX --> e220 RX AUX M0 M1
-#else
-// Use HardwareSerial for ESP32, ESP8266, etc
-LoRa_E220 e220ttl(&Serial2, 15, 21, 19); //  ESP32 RX AUX M0 M1
-#endif // Arduino RX <-- e220 TX, Arduino TX --> e220 RX AUX M0 M1
 #else
 // Use HardwareSerial for ESP32, ESP8266, etc
 LoRa_E220 e220ttl(&Serial2, 15, 21, 19); //  ESP32 RX AUX M0 M1
