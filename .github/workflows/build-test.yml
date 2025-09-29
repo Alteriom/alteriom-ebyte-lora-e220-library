@@ -45,7 +45,7 @@ jobs:
       run: |
         arduino-cli compile --fqbn ${{ matrix.platform }} --library . ${{ matrix.example }} --verbose
 
-  platformio-build-test:
+  platformio-test:
     runs-on: ubuntu-latest
     
     steps:
@@ -61,9 +61,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install platformio
     
-    - name: Build for multiple platforms
+    - name: Run native unit tests
       run: |
-        pio run -e uno -e esp32dev -e nodemcuv2
+        pio test -e native
 
   library-validation:
     runs-on: ubuntu-latest
@@ -78,7 +78,7 @@ jobs:
         compliance: strict
 
   release:
-    needs: [arduino-compile-test, platformio-build-test, library-validation]
+    needs: [arduino-compile-test, platformio-test, library-validation]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
     
