@@ -37,8 +37,6 @@ jobs:
     
     - name: Update GitHub Wiki
       run: |
-    - name: Update GitHub Wiki
-      run: |
         echo "📚 Updating GitHub Wiki..."
         
         # Get current version from library.properties

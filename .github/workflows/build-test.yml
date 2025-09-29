@@ -76,6 +76,6 @@ jobs:
     - name: Validate Arduino library format
       uses: arduino/arduino-lint-action@v2
       with:
-        library-manager: submit
+        library-manager: update
         compliance: strict
 

@@ -1,14 +1,28 @@
-/*
- * EBYTE LoRa E2200 Series
- * https://www.mischianti.org/category/my-libraries/lora-e220-devices/
+/**
+ * @file LoRa_E220.cpp
+ * @brief Implementation of EBYTE LoRa E220 Series Library - Alteriom Fork
+ * 
+ * This file contains the complete implementation of the LoRa E220 class,
+ * providing all the functionality for:
+ * - Device initialization and configuration
+ * - Multiple constructor variants for different platforms
+ * - Message transmission and reception
+ * - Mode management and hardware control
+ * - Error handling and status reporting
+ * 
+ * @author Renzo Mischianti (Original implementation)
+ * @author Alteriom (Fork maintainer with enhancements)
+ * @version 1.1.5
+ * 
+ * @see Original: https://www.mischianti.org/category/my-libraries/lora-e220-devices/
+ * @see Fork: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library
  *
- * The MIT License (MIT)
+ * @note The MIT License (MIT)
  *
  * Copyright (c) 2019 Renzo Mischianti www.mischianti.org All right reserved.
  *
  * You may copy, alter and reuse this code in any way you like, but please leave
  * reference to www.mischianti.org in your comments if you redistribute this code.
- *
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -31,7 +45,32 @@
 
 #include "LoRa_E220.h"
 
+//=============================================================================
+// SOFTWARE SERIAL CONSTRUCTORS
+//=============================================================================
+
 #ifdef ACTIVATE_SOFTWARE_SERIAL
+/**
+ * @brief Constructor for Software Serial with TX/RX pins
+ * 
+ * Initializes the LoRa E220 device using Software Serial communication.
+ * This constructor is used on platforms that don't have multiple hardware
+ * UART interfaces (Arduino Uno, Nano, Pro Mini, etc.).
+ * 
+ * @param txE220pin Digital pin number for TX to E220 (Arduino TX -> E220 RX)
+ * @param rxE220pin Digital pin number for RX from E220 (Arduino RX <- E220 TX)
+ * @param bpsRate UART baud rate for communication
+ * 
+ * @note Creates a new SoftwareSerial object internally
+ * @note Sets hardware serial pointer to NULL
+ * @note Stores pin numbers for potential future reference
+ * 
+ * @implementation
+ * - Allocates new SoftwareSerial instance on heap
+ * - Configures TX/RX pins according to parameters
+ * - Sets software serial flag to true
+ * - Initializes baud rate setting
+ */
 LoRa_E220::LoRa_E220(byte txE220pin, byte rxE220pin, UART_BPS_RATE bpsRate){
     this->txE220pin = txE220pin;
     this->rxE220pin = rxE220pin;
@@ -41,6 +80,26 @@ LoRa_E220::LoRa_E220(byte txE220pin, byte rxE220pin, UART_BPS_RATE bpsRate){
 
     this->bpsRate = bpsRate;
 }
+
+/**
+ * @brief Constructor for Software Serial with TX/RX pins and AUX pin
+ * 
+ * Extended constructor that includes AUX pin for status monitoring.
+ * The AUX pin provides device status information (HIGH = ready, LOW = busy).
+ * 
+ * @param txE220pin Digital pin number for TX to E220
+ * @param rxE220pin Digital pin number for RX from E220
+ * @param auxPin Digital pin number for AUX status monitoring
+ * @param bpsRate UART baud rate for communication
+ * 
+ * @note AUX pin enables reliable communication timing
+ * @note Device status can be monitored through AUX pin state
+ * 
+ * @implementation
+ * - Extends basic Software Serial constructor
+ * - Adds AUX pin configuration
+ * - AUX pin can be used for waitCompleteResponse()
+ */
 LoRa_E220::LoRa_E220(byte txE220pin, byte rxE220pin, byte auxPin, UART_BPS_RATE bpsRate){
     this->txE220pin = txE220pin;
     this->rxE220pin = rxE220pin;
