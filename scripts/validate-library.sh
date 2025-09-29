@@ -23,6 +23,10 @@ REQUIRED_FILES=(
     "examples"
     ".github/workflows/build-test.yml"
     ".github/workflows/release.yml"
+    "README_ALTERIOM.md"
+    "DEPLOYMENT_GUIDE.md"
+    "CONTRIBUTING.md"
+    "keywords.txt"
 )
 
 for file in "${REQUIRED_FILES[@]}"; do
@@ -124,6 +128,50 @@ if grep -q "Alteriom" LoRa_E220.h; then
 else
     echo "  ⚠️  Alteriom attribution not found in header"
     ((WARNINGS++))
+fi
+
+# Check release readiness
+echo ""
+echo "🚀 Checking release readiness..."
+
+# Check that CHANGELOG has current version entry
+CURRENT_VERSION=$(grep "version=" library.properties | cut -d'=' -f2)
+if grep -q "## \[$CURRENT_VERSION\]" CHANGELOG.md; then
+    echo "  ✅ CHANGELOG.md has entry for version $CURRENT_VERSION"
+else
+    echo "  ❌ CHANGELOG.md missing entry for version $CURRENT_VERSION"
+    ((ERRORS++))
+fi
+
+# Check that GitHub workflows are valid YAML
+if command -v python3 >/dev/null 2>&1; then
+    python3 -c "import yaml; yaml.safe_load(open('.github/workflows/build-test.yml'))" 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "  ✅ build-test.yml is valid YAML"
+    else
+        echo "  ❌ build-test.yml has YAML syntax errors"
+        ((ERRORS++))
+    fi
+    
+    python3 -c "import yaml; yaml.safe_load(open('.github/workflows/release.yml'))" 2>/dev/null
+    if [ $? -eq 0 ]; then
+        echo "  ✅ release.yml is valid YAML"
+    else
+        echo "  ❌ release.yml has YAML syntax errors"
+        ((ERRORS++))
+    fi
+else
+    echo "  ⚠️  Python3 not available, skipping YAML validation"
+    ((WARNINGS++))
+fi
+
+# Check example count
+EXAMPLE_COUNT=$(ls -1d examples/*/ 2>/dev/null | wc -l)
+if [ $EXAMPLE_COUNT -ge 5 ]; then
+    echo "  ✅ Examples directory contains $EXAMPLE_COUNT sketches (minimum 5)"
+else
+    echo "  ❌ Examples directory contains only $EXAMPLE_COUNT sketches (minimum 5 required)"
+    ((ERRORS++))
 fi
 
 # Final results

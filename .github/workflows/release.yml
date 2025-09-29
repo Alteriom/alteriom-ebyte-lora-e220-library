@@ -6,7 +6,53 @@ on:
       - 'v*'
 
 jobs:
+  # Run tests first
+  arduino-compile-test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+          - arduino:avr:uno
+          - esp32:esp32:esp32
+          - esp8266:esp8266:nodemcuv2
+        example:
+          - examples/01_getConfiguration/01_getConfiguration.ino
+          - examples/01_setConfiguration/01_setConfiguration.ino
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Arduino CLI
+      uses: arduino/setup-arduino-cli@v1
+      with:
+        version: '0.34.2'
+    
+    - name: Install Arduino platforms
+      run: |
+        arduino-cli core update-index
+        arduino-cli core install arduino:avr
+        arduino-cli core install esp32:esp32 --additional-urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+        arduino-cli core install esp8266:esp8266 --additional-urls http://arduino.esp8266.com/stable/package_esp8266com_index.json
+    
+    - name: Compile example
+      run: |
+        arduino-cli compile --fqbn ${{ matrix.platform }} --library . ${{ matrix.example }} --verbose
+
+  library-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Validate Arduino library format
+      uses: arduino/arduino-lint-action@v1
+      with:
+        library-manager: submit
+        compliance: strict
+
   release:
+    needs: [arduino-compile-test, library-validation]
     runs-on: ubuntu-latest
     
     steps:
@@ -47,17 +93,46 @@ jobs:
           library.properties
           library.json
           CHANGELOG.md
+          DEPLOYMENT_GUIDE.md
+          README_ALTERIOM.md
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
-    - name: Library Manager Instructions
+    - name: Validate Library Package
+      run: |
+        echo "🔍 Final validation before Arduino Library Manager submission..."
+        ./scripts/validate-library.sh
+    
+    - name: Arduino Library Manager Submission Instructions
       run: |
         echo "================================"
-        echo "Arduino Library Manager Submission"
+        echo "🚀 Arduino Library Manager Submission"
         echo "================================"
+        echo ""
+        echo "✅ Release ${{ steps.release_notes.outputs.VERSION }} has been created successfully!"
+        echo ""
+        echo "📋 Next Steps:"
         echo "1. Go to: https://github.com/arduino/library-registry"
-        echo "2. Create a new issue with repository URL:"
-        echo "   https://github.com/Alteriom/EByte_LoRa_E220_Series_Library"
-        echo "3. Include tag: ${{ github.ref_name }}"
-        echo "4. Library name: Alteriom_EByte_LoRa_E220"
+        echo "2. Create a new issue with the following details:"
+        echo ""
+        echo "   Title: Add Alteriom_EByte_LoRa_E220 library"
+        echo ""
+        echo "   Body:"
+        echo "   ```"
+        echo "   Repository URL: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library"
+        echo "   Release tag: ${{ github.ref_name }}"
+        echo "   Library name: Alteriom_EByte_LoRa_E220"
+        echo "   Version: ${{ steps.release_notes.outputs.VERSION }}"
+        echo "   "
+        echo "   This is a fork of the EByte LoRa E220 Series Library with enhanced"
+        echo "   CI/CD, automated releases, and improved Arduino Library Manager compatibility."
+        echo "   ```"
+        echo ""
+        echo "3. 📧 Monitor the issue for Arduino team approval"
+        echo "4. 🎉 Library will be available in Arduino Library Manager after approval"
+        echo ""
+        echo "💡 Additional Resources:"
+        echo "   - Release Notes: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/releases/tag/${{ github.ref_name }}"
+        echo "   - Documentation: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/blob/main/README_ALTERIOM.md"
+        echo "   - Deployment Guide: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/blob/main/DEPLOYMENT_GUIDE.md"
         echo "================================"
