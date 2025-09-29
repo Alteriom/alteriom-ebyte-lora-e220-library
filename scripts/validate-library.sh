@@ -18,14 +18,14 @@ REQUIRED_FILES=(
     "LoRa_E220.h"
     "LoRa_E220.cpp"
     "Alteriom_EByte_LoRa_E220.h"
-    "CHANGELOG.md"
+    "docs/CHANGELOG.md"
     "LICENSE.md"
     "examples"
     ".github/workflows/build-test.yml"
     ".github/workflows/release.yml"
-    "README_ALTERIOM.md"
-    "DEPLOYMENT_GUIDE.md"
-    "CONTRIBUTING.md"
+    "README.md"
+    "docs/DEPLOYMENT_GUIDE.md"
+    "docs/CONTRIBUTING.md"
     "keywords.txt"
 )
 
@@ -136,7 +136,7 @@ echo "🚀 Checking release readiness..."
 
 # Check that CHANGELOG has current version entry
 CURRENT_VERSION=$(grep "version=" library.properties | cut -d'=' -f2)
-if grep -q "## \[$CURRENT_VERSION\]" CHANGELOG.md; then
+if grep -q "## \[$CURRENT_VERSION\]" docs/CHANGELOG.md; then
     echo "  ✅ CHANGELOG.md has entry for version $CURRENT_VERSION"
 else
     echo "  ❌ CHANGELOG.md missing entry for version $CURRENT_VERSION"
