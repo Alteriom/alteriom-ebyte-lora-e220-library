@@ -26,19 +26,14 @@
 #include "Arduino.h"
 #include "LoRa_E220.h"
 
-// ---------- esp8266 pins --------------
-//LoRa_E220 e220ttl(RX, TX, AUX, M0, M1);  // Arduino RX <-- e220 TX, Arduino TX --> e220 RX
-LoRa_E220 e220ttl(D3, D4, D5, D7, D6); // Arduino RX <-- e220 TX, Arduino TX --> e220 RX AUX M0 M1
-//LoRa_E220 e220ttl(D2, D3); // Config without connect AUX and M0 M1
-
-//#include <SoftwareSerial.h>
-//SoftwareSerial mySerial(D2, D3); // Arduino RX <-- e220 TX, Arduino TX --> e220 RX
-//LoRa_E220 e220ttl(&mySerial, D5, D7, D6); // AUX M0 M1
-// -------------------------------------
-
-// ---------- Arduino pins --------------
-//LoRa_E220 e220ttl(4, 5, 3, 7, 6); // Arduino RX <-- e220 TX, Arduino TX --> e220 RX AUX M0 M1
-//LoRa_E220 e220ttl(4, 5); // Config without connect AUX and M0 M1
+// ---------- Platform-specific pins --------------
+#ifdef ESP8266
+// esp8266 pins
+LoRa_E220 e220ttl(D3, D4, D5, D7, D6); // ESP8266 RX <-- e220 TX, ESP8266 TX --> e220 RX AUX M0 M1
+#else
+// Arduino pins
+LoRa_E220 e220ttl(4, 5, 3, 7, 6); // Arduino RX <-- e220 TX, Arduino TX --> e220 RX AUX M0 M1
+#endif
 
 //#include <SoftwareSerial.h>
 //SoftwareSerial mySerial(4, 5); // Arduino RX <-- e220 TX, Arduino TX --> e220 RX

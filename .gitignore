@@ -54,4 +54,4 @@ yarn.lock
 .yarn/
 
 # MCP server cache
-.mcp-cache/
+.mcp-cache/bin/
