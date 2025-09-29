@@ -5,6 +5,50 @@
 [![Arduino Library Manager](https://img.shields.io/badge/Arduino_Library_Manager-Compatible-blue)](https://www.arduino.cc/reference/en/libraries/)
 [![PlatformIO](https://img.shields.io/badge/PlatformIO-Compatible-orange)](https://registry.platformio.org/libraries/alteriom/Alteriom_EByte_LoRa_E220)
 
+---
+
+## 📚 **[🚀 VIEW COMPLETE DOCUMENTATION](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**
+
+**Experience our modern, interactive documentation with live search, mobile-friendly design, and copy-paste Arduino examples!**
+
+[![Documentation Preview](https://img.shields.io/badge/📚_Modern_Docs-Live_Now-success?style=for-the-badge&logo=gitbook&logoColor=white)](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)
+[![Quick Start](https://img.shields.io/badge/⚡_Quick_Start-5_Minutes-blue?style=for-the-badge&logo=arduino&logoColor=white)](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)
+[![API Reference](https://img.shields.io/badge/🔧_API_Docs-Complete-green?style=for-the-badge&logo=cplusplus&logoColor=white)](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)
+
+---
+
+This is the **Alteriom fork** of the EByte LoRa E220 Series Library, enhanced with modern CI/CD practices, automated releases, and improved package management.
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/contributing) for details.
+
+## 📖 Community Wiki
+
+Our GitHub Wiki provides community-driven content that supplements the main documentation:
+
+- **[📖 Visit the Wiki](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki)** - Community guides and tutorials
+- **[🤝 Community Guides](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Community-Guides)** - User-contributed content
+- **[🔧 Project Showcase](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Project-Showcase)** - Real-world implementations
+- **[📋 Wiki Integration Guide](docs/wiki-integration-guide.md)** - How to contribute to the wiki
+
+> 💡 **Tip**: For the most comprehensive and up-to-date documentation, start with our **[📚 Live Documentation](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**ies_Library/actions/workflows/build-test.yml)
+[![Release](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/release.yml/badge.svg)](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/release.yml)
+[![Arduino Library Manager](https://img.shields.io/badge/Arduino_Library_Manager-Compatible-blue)](https://www.arduino.cc/reference/en/libraries/)
+[![PlatformIO](https://img.shields.io/badge/PlatformIO-Compatible-orange)](https://registry.platformio.org/libraries/alteriom/Alteriom_EByte_LoRa_E220)
+
+---
+
+## 📚 **[🚀 VIEW COMPLETE DOCUMENTATION](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**
+
+**Experience our modern, interactive documentation with live search, mobile-friendly design, and copy-paste Arduino examples!**
+
+[![Documentation Preview](https://img.shields.io/badge/📚_Modern_Docs-Live_Now-success?style=for-the-badge&logo=gitbook&logoColor=white)](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)
+[![Quick Start](https://img.shields.io/badge/⚡_Quick_Start-5_Minutes-blue?style=for-the-badge&logo=arduino&logoColor=white)](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)
+[![API Reference](https://img.shields.io/badge/🔧_API_Docs-Complete-green?style=for-the-badge&logo=cplusplus&logoColor=white)](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)
+
+---
+
 This is the **Alteriom fork** of the EByte LoRa E220 Series Library, enhanced with modern CI/CD practices, automated releases, and improved package management.
 
 ## 🚀 What's New in the Alteriom Fork
@@ -134,25 +178,51 @@ arduino-cli compile --fqbn esp32:esp32:esp32 examples/01_getConfiguration/
 
 ## 📖 Documentation
 
-### 🌟 Comprehensive Documentation System
+### 🚀 **[📚 VIEW LIVE DOCUMENTATION →](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**
 
-This library features **world-class documentation** with:
+**Experience our modern, interactive documentation with:**
 
-- **📚 Complete API Reference**: Full Doxygen documentation with examples
-- **🚀 Live Documentation**: Auto-generated and deployed to GitHub Pages  
-- **💡 Interactive Examples**: 8+ Arduino sketches with detailed explanations
-- **🔧 Platform Guides**: Specific setup instructions for each supported platform
-- **⚡ Quick Start**: Get running in under 5 minutes
+✨ **Beautiful responsive design** - Works perfectly on desktop, tablet, and mobile  
+🔍 **Live search** - Find what you need instantly  
+💡 **Interactive examples** - Copy-paste ready Arduino code  
+🎯 **Guided tutorials** - Step-by-step instructions for every platform  
+📱 **Mobile-friendly** - Read docs anywhere, anytime  
+⚡ **Fast loading** - Optimized for quick access  
 
-### 📋 Documentation Resources
+---
 
-- **[📖 API Documentation](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)** - Complete API reference (auto-generated)
-- **[🚀 Quick Start Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)** - Get up and running fast
-- **[📚 Examples Library](examples/)** - 8+ complete Arduino sketches  
-- **[🔧 Platform Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-setup)** - Platform-specific configuration
-- **[📋 Configuration Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** - Device parameter reference
-- **[🛠️ Troubleshooting](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/troubleshooting)** - Common issues and solutions
-- **[📊 Performance Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/performance)** - Range and power optimization
+### 🌟 Modern Documentation Features
+
+This library features **world-class documentation** built with modern web technologies:
+
+- **📚 Complete API Reference**: Interactive documentation with live examples
+- **🚀 Modern Web Interface**: Beautiful, responsive design powered by Docsify  
+- **💡 Step-by-Step Guides**: 8+ Arduino sketches with detailed explanations
+- **🔧 Platform-Specific Setup**: Tailored instructions for each supported platform
+- **⚡ 5-Minute Quick Start**: Get your first LoRa message working fast
+- **🔍 Full-Text Search**: Find any information instantly
+- **📱 Mobile Optimized**: Perfect experience on any device
+
+### 📋 Quick Access Links
+
+| Section | Description | Link |
+|---------|-------------|------|
+| 🏠 **Home** | Main documentation portal | **[📚 Live Docs](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)** |
+| 🚀 **Quick Start** | Get running in 5 minutes | **[⚡ Start Here](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)** |
+| 📖 **API Reference** | Complete method documentation | **[� API Docs](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)** |
+| 💻 **Examples** | Working Arduino code | **[📋 Examples](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/examples)** |
+| ⚙️ **Configuration** | Device setup guide | **[🔧 Config](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** |
+| 🆘 **Troubleshooting** | Solutions to common issues | **[🛠️ Help](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/troubleshooting)** |
+
+### 📚 Documentation Highlights
+
+- **[📖 Complete API Reference](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)** - Every method documented with examples
+- **[🚀 5-Minute Quick Start](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)** - Get your first LoRa project working
+- **[📚 Examples Library](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/examples)** - 8+ complete Arduino sketches  
+- **[🔧 Platform Setup Guides](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-setup)** - Arduino, ESP32, ESP8266, STM32, Pi Pico
+- **[⚙️ Configuration Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** - Optimize for your application
+- **[🛠️ Troubleshooting](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/troubleshooting)** - Solutions to common issues
+- **[📊 Performance Optimization](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/performance)** - Maximize range and efficiency
 - **[🔒 Security Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/encryption)** - Encryption and secure communication
 
 ### 🎯 Documentation Features

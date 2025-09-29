@@ -2,39 +2,61 @@
 
 Welcome to the comprehensive documentation for the Alteriom EByte LoRa E220 Series Library.
 
+## � **[�📚 VISIT LIVE DOCUMENTATION](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**
+
+**Our modern, interactive documentation features:**
+- 📱 Mobile-friendly responsive design
+- 🔍 Live search functionality  
+- 💻 Copy-paste Arduino examples
+- 🎯 Platform-specific guides
+- ⚡ 5-minute quick start
+
+---
+
 ## 📚 Documentation Structure
 
-### Getting Started
-- **[Quick Start Guide](../README.md)** - Main README with installation and basic usage
-- **[Examples](../examples/)** - Complete example sketches and tutorials
+### 🚀 Getting Started
+- **[🏠 Main Documentation Site](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)** - Modern interactive docs
+- **[⚡ Quick Start Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)** - Get running in 5 minutes
+- **[💻 Examples Library](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/examples)** - Complete Arduino sketches
 
-### Technical Documentation
-- **[Original Documentation](original-documentation.md)** - Complete technical reference from original author
-- **[API Reference](api-reference.md)** - Detailed API documentation
-- **[Hardware Guide](hardware-guide.md)** - Wiring diagrams and hardware setup
+### 🔧 Technical Documentation
+- **[📖 API Reference](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)** - Complete method documentation
+- **[⚙️ Configuration Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** - Device parameter reference
+- **[🔧 Platform Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-setup)** - Hardware-specific configuration
 
-### Development
-- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute to the project
-- **[Deployment Guide](DEPLOYMENT_GUIDE.md)** - Release and publishing procedures
-- **[Changelog](CHANGELOG.md)** - Version history and changes
+### 💻 Development
+- **[🤝 Contributing Guidelines](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/contributing)** - How to contribute to the project
+- **[🏗️ Building Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/building)** - Development setup
+- **[📋 Changelog](CHANGELOG.md)** - Version history and changes
 
-### Platform Specific
-- **[Arduino Setup](arduino-setup.md)** - Arduino IDE and library manager setup
-- **[PlatformIO Setup](platformio-setup.md)** - PlatformIO configuration and usage
-- **[ESP32 Guide](esp32-guide.md)** - ESP32 specific configurations
-- **[ESP8266 Guide](esp8266-guide.md)** - ESP8266 specific configurations
+### 🌍 Platform Specific
+- **[🔵 Arduino Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-arduino)** - Arduino IDE and library manager
+- **[🟠 ESP32 Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-esp32)** - ESP32 configurations
+- **[🔴 ESP8266 Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-esp8266)** - ESP8266 setup
+- **[🟢 STM32 Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-stm32)** - STM32 configuration
 
-## 🔗 Quick Links
+## 🔗 Quick Access Links
 
-- **[GitHub Repository](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library)**
-- **[GitHub Releases](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/releases)**
-- **[NPM Package](https://www.npmjs.com/package/alteriom-ebyte-lora-e220)**
-- **[Issues & Support](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/issues)**
+| Resource | Description | Link |
+|----------|-------------|------|
+| 🏠 **Live Docs** | Modern documentation site | **[📚 Visit Now](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)** |
+| 🚀 **Quick Start** | 5-minute setup guide | **[⚡ Start Here](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)** |
+| 💻 **Examples** | Working Arduino code | **[📋 Examples](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/examples)** |
+| 🔧 **API Docs** | Complete method reference | **[📖 API](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)** |
+| 🐙 **Repository** | Main GitHub repository | **[🔗 GitHub](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library)** |
+| 📦 **Releases** | Download latest version | **[⬇️ Releases](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/releases)** |
+| 📱 **NPM** | Node.js package | **[📦 NPM](https://www.npmjs.com/package/alteriom-ebyte-lora-e220)** |
 
-## 📖 Wiki
+## 📖 GitHub Wiki
 
-The GitHub Wiki contains additional documentation and community contributions:
-- **[Visit the Wiki](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki)**
+The GitHub Wiki serves as a community-driven supplement to our main documentation:
+
+- **[📖 Visit the Wiki](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki)** - Community contributions and additional guides
+- **[🤝 Wiki Home](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Home)** - Wiki main page
+- **[📝 Community Guides](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Community-Guides)** - User-contributed tutorials
+
+> **Note**: For the most up-to-date and comprehensive documentation, visit our **[📚 Live Documentation Site](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**
 
 ## 🆘 Getting Help
 
