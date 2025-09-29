@@ -73,14 +73,16 @@
   "directories": {
     "example": "examples",
     "test": "test",
-    "doc": ".github"
+    "doc": "docs"
   },
   "files": [
     "LoRa_E220.h",
     "LoRa_E220.cpp",
     "EByte_LoRa_E220_library.h",
+    "Alteriom_EByte_LoRa_E220.h",
     "includes/",
     "examples/",
+    "docs/",
     "library.properties",
     "library.json",
     "keywords.txt",

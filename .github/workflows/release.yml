@@ -33,9 +33,9 @@ jobs:
         echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
         
         # Generate release notes from CHANGELOG.md
-        if [ -f "CHANGELOG.md" ]; then
+        if [ -f "docs/CHANGELOG.md" ]; then
           # Extract current version section from changelog
-          NOTES=$(awk "/^## \[$VERSION\]/{flag=1; next} /^## \[/{flag=0} flag" CHANGELOG.md || echo "Release $VERSION")
+          NOTES=$(awk "/^## \[$VERSION\]/{flag=1; next} /^## \[/{flag=0} flag" docs/CHANGELOG.md || echo "Release $VERSION")
         else
           NOTES="Release $VERSION - Alteriom fork of EByte LoRa E220 Series Library with enhanced CI/CD"
         fi
@@ -56,9 +56,9 @@ jobs:
         files: |
           library.properties
           library.json
-          CHANGELOG.md
-          DEPLOYMENT_GUIDE.md
-          README_ALTERIOM.md
+          docs/CHANGELOG.md
+          docs/DEPLOYMENT_GUIDE.md
+          docs/README.md
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
@@ -125,6 +125,183 @@ jobs:
         echo "   - Arduino examples: examples/"
         echo "   - MCP configuration: .github/mcp-server-config.json"
         echo "   - PlatformIO: platformio.ini"
+        echo "================================"
+
+  # Publish documentation to GitHub Wiki
+  wiki-publish:
+    needs: [tests, release]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Checkout Wiki
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ github.repository }}.wiki
+        path: wiki
+        token: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: Update Wiki Pages
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "📚 Updating GitHub Wiki for version $VERSION..."
+        
+        # Create wiki directory if it doesn't exist
+        mkdir -p wiki
+        
+        # Copy documentation files to wiki
+        cp docs/README.md wiki/Home.md
+        cp docs/original-documentation.md wiki/Complete-Documentation.md
+        cp docs/DEPLOYMENT_GUIDE.md wiki/Deployment-Guide.md
+        cp docs/CONTRIBUTING.md wiki/Contributing.md
+        cp docs/CHANGELOG.md wiki/Changelog.md
+        
+        # Create API Reference page
+        cat > wiki/API-Reference.md << 'EOF'
+        # API Reference
+        
+        This page contains the complete API reference for the Alteriom EByte LoRa E220 Library.
+        
+        ## Core Classes
+        
+        ### LoRa_E220
+        
+        The main class for interacting with EByte LoRa E220 devices.
+        
+        #### Constructors
+        
+        ```cpp
+        LoRa_E220(byte txE220pin, byte rxE220pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+        LoRa_E220(byte txE220pin, byte rxE220pin, byte auxPin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+        LoRa_E220(byte txE220pin, byte rxE220pin, byte auxPin, byte m0Pin, byte m1Pin, UART_BPS_RATE bpsRate = UART_BPS_RATE_9600);
+        ```
+        
+        #### Methods
+        
+        - `begin()` - Initialize the device
+        - `getConfiguration()` - Get current device configuration
+        - `setConfiguration()` - Set device configuration
+        - `sendMessage()` - Send a message
+        - `receiveMessage()` - Receive a message
+        - `sendFixedMessage()` - Send message to specific address
+        - `sendBroadcastMessage()` - Send broadcast message
+        
+        For complete documentation, see [Complete Documentation](Complete-Documentation).
+        EOF
+        
+        # Create Examples page
+        cat > wiki/Examples.md << 'EOF'
+        # Examples
+        
+        This page contains links and descriptions of all available examples.
+        
+        ## Basic Examples
+        
+        - **[01_getConfiguration](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/01_getConfiguration)** - Read device configuration
+        - **[01_setConfiguration](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/01_setConfiguration)** - Configure device parameters
+        - **[02_sendTransparentTransmission](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/02_sendTransparentTransmission)** - Simple message sending
+        
+        ## Advanced Examples
+        
+        - **[04_sendFixedTransmission](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/04_sendFixedTransmission)** - Targeted message delivery
+        - **[05_sendFixedTransmissionStructure](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/05_sendFixedTransmissionStructure)** - Send structured data
+        - **[06_sendWORMessage](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/06_sendWORMessage)** - Wake-on-Radio messaging
+        - **[07_receiveMessages](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples/07_receiveMessages)** - Message reception handling
+        
+        ## Platform-Specific Examples
+        
+        Each example includes platform-specific configurations for:
+        - Arduino UNO/Nano
+        - ESP32
+        - ESP8266
+        - STM32
+        - Raspberry Pi Pico
+        
+        For the complete code and wiring diagrams, visit the [examples directory](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples).
+        EOF
+        
+        # Create Installation Guide
+        cat > wiki/Installation.md << 'EOF'
+        # Installation Guide
+        
+        ## Arduino Library Manager
+        
+        1. Open Arduino IDE
+        2. Go to **Tools** → **Manage Libraries**
+        3. Search for "**Alteriom_EByte_LoRa_E220**"
+        4. Click **Install**
+        
+        ## PlatformIO
+        
+        Add to your `platformio.ini`:
+        ```ini
+        lib_deps = 
+            Alteriom/Alteriom_EByte_LoRa_E220@^1.1.0
+        ```
+        
+        ## NPM Package
+        
+        For MCP server integration:
+        ```bash
+        npm install alteriom-ebyte-lora-e220
+        ```
+        
+        ## Manual Installation
+        
+        1. Download the latest release from [GitHub Releases](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/releases)
+        2. Extract to your Arduino libraries folder
+        3. Restart Arduino IDE
+        
+        ## Supported Platforms
+        
+        - Arduino UNO/Nano/Mega
+        - ESP32 (all variants)
+        - ESP8266 (NodeMCU, Wemos D1, etc.)
+        - STM32 (Blue Pill, Nucleo, etc.)
+        - Raspberry Pi Pico
+        - SAMD21/SAMD51 (Arduino MKR, Adafruit Feather)
+        EOF
+    
+    - name: Commit and Push Wiki Changes
+      run: |
+        cd wiki
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        
+        if git diff --staged --quiet; then
+          echo "No changes to commit"
+        else
+          git commit -m "Update documentation for release ${GITHUB_REF#refs/tags/v}"
+          git push
+          echo "✅ Wiki updated successfully!"
+        fi
+    
+    - name: Wiki Publication Success
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "================================"
+        echo "📚 Wiki Publication Successful!"
+        echo "================================"
+        echo ""
+        echo "📖 Wiki URL: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki"
+        echo "🏠 Home Page: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Home"
+        echo "📋 API Reference: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/API-Reference"
+        echo "📚 Examples: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Examples"
+        echo ""
+        echo "📝 Updated pages:"
+        echo "   - Home (from docs/README.md)"
+        echo "   - Complete Documentation (from docs/original-documentation.md)"
+        echo "   - API Reference (generated)"
+        echo "   - Examples (generated)"
+        echo "   - Installation Guide (generated)"
+        echo "   - Contributing Guidelines (from docs/CONTRIBUTING.md)"
+        echo "   - Changelog (from docs/CHANGELOG.md)"
         echo "================================"
 
   submission-instructions:
