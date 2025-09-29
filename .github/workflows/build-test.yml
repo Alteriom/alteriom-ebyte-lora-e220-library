@@ -1,4 +1,6 @@
 name: Build and Test Library
+permissions:
+  contents: read
 
 on:
   push:
