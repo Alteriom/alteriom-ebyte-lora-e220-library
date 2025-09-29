@@ -1,19 +1,17 @@
-name: Generate Documentation
+name: 📚 Modern Documentation
 
 on:
   push:
     branches: [ main ]
     paths:
-      - '**.h'
-      - '**.cpp'
-      - 'Doxyfile'
+      - 'docs/**'
+      - '**.md'
       - '.github/workflows/documentation.yml'
   pull_request:
     branches: [ main ]
     paths:
-      - '**.h'  
-      - '**.cpp'
-      - 'Doxyfile'
+      - 'docs/**'
+      - '**.md'
   workflow_dispatch:
 
 permissions:
@@ -26,72 +24,128 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  generate-docs:
+  build-modern-docs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: Checkout repository
+    - name: 📥 Checkout repository
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
 
-    - name: Install Doxygen
+    - name: 🔍 Setup documentation structure
       run: |
-        sudo apt-get update
-        sudo apt-get install -y doxygen graphviz
+        echo "🏗️ Setting up modern documentation with Docsify..."
         
-    - name: Verify Doxygen installation
+        # Ensure docs directory exists
+        mkdir -p docs
+        
+        # Copy README to docs if it doesn't exist there
+        if [ ! -f docs/README.md ]; then
+          cp README.md docs/README.md
+        fi
+        
+        # Create .nojekyll for GitHub Pages
+        touch docs/.nojekyll
+        
+        # List documentation files
+        echo "📁 Documentation files:"
+        find docs -name "*.md" -o -name "*.html" | head -20
+        
+    - name: 🎨 Validate Docsify setup
       run: |
-        doxygen --version
-        dot -V
+        echo "✅ Checking Docsify configuration..."
         
-    - name: Generate documentation
-      run: |
-        # Create output directory
-        mkdir -p docs/doxygen
-        
-        # Generate documentation
-        doxygen Doxyfile
-        
-        # Check if documentation was generated
-        if [ -d "docs/doxygen/html" ]; then
-          echo "✅ Documentation generated successfully"
-          echo "📁 Generated files:"
-          ls -la docs/doxygen/html/ | head -10
+        # Check if index.html exists
+        if [ -f docs/index.html ]; then
+          echo "✅ Docsify index.html found"
         else
-          echo "❌ Documentation generation failed"
+          echo "❌ Missing docs/index.html"
           exit 1
         fi
         
-    - name: Check documentation completeness
-      run: |
-        # Count documented vs undocumented items
-        if [ -f "docs/doxygen/html/index.html" ]; then
-          echo "✅ Main documentation index created"
-        fi
-        
-        # Check for warnings in doxygen output
-        if [ -f "doxygen_warnings.log" ]; then
-          echo "⚠️ Doxygen warnings found:"
-          cat doxygen_warnings.log
+        # Check sidebar
+        if [ -f docs/_sidebar.md ]; then
+          echo "✅ Sidebar configuration found"
         else
-          echo "✅ No doxygen warnings"
+          echo "⚠️ No sidebar found - will use auto-generated"
         fi
         
-    - name: Setup Pages
+        # Check navbar
+        if [ -f docs/_navbar.md ]; then
+          echo "✅ Navbar configuration found"
+        else
+          echo "⚠️ No navbar found - will use default"
+        fi
+        
+    - name: 📊 Generate documentation metrics
+      run: |
+        echo "📊 Documentation Statistics"
+        echo "=========================="
+        
+        # Count documentation files
+        MD_COUNT=$(find docs -name "*.md" | wc -l)
+        EXAMPLE_COUNT=$(find examples -name "*.ino" 2>/dev/null | wc -l || echo "0")
+        
+        echo "📄 Markdown files: $MD_COUNT"
+        echo "💻 Arduino examples: $EXAMPLE_COUNT"
+        echo "📁 Total documentation size:"
+        du -sh docs/ || echo "Could not calculate size"
+        
+        # Create metrics file for the site
+        cat > docs/metrics.md << EOF
+        # 📊 Documentation Metrics
+        
+        - **📄 Documentation Pages**: $MD_COUNT
+        - **💻 Arduino Examples**: $EXAMPLE_COUNT  
+        - **🔄 Last Updated**: $(date '+%Y-%m-%d %H:%M:%S UTC')
+        - **📦 Library Version**: $(grep 'version=' library.properties | cut -d'=' -f2)
+        - **🏗️ Build**: #${{ github.run_number }}
+        
+        This documentation is automatically generated and deployed.
+        EOF
+        
+    - name: 🔧 Setup GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: actions/configure-pages@v4
       
-    - name: Upload documentation artifacts
+    - name: 📤 Upload documentation to Pages
       if: github.ref == 'refs/heads/main'
       uses: actions/upload-pages-artifact@v3
       with:
-        path: ./docs/doxygen/html
+        path: ./docs
         
-    - name: Archive documentation
+    - name: 📦 Archive documentation artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: doxygen-documentation
-        path: docs/doxygen/html/
+        name: modern-documentation
+        path: docs/
         retention-days: 30
+        
+    - name: ✅ Documentation build summary
+      run: |
+        echo "================================"
+        echo "🎉 Modern Documentation Built!"
+        echo "================================"
+        echo ""
+        echo "🌟 Features:"
+        echo "  ✅ Beautiful responsive design with Docsify"
+        echo "  ✅ Live search functionality"
+        echo "  ✅ Mobile-friendly interface"
+        echo "  ✅ Code syntax highlighting"
+        echo "  ✅ Tabbed content support"
+        echo "  ✅ Copy-to-clipboard for code"
+        echo "  ✅ Progress bar navigation"
+        echo "  ✅ Arduino-style code blocks"
+        echo ""
+        echo "🔗 Access Methods:"
+        echo "  📱 GitHub Pages: https://alteriom.github.io/EByte_LoRa_E220_Series_Library/"
+        echo "  📁 Repository: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/docs"
+        echo ""
+        echo "📊 Statistics:"
+        echo "  📄 Pages: $(find docs -name "*.md" | wc -l)"
+        echo "  💻 Examples: $(find examples -name "*.ino" 2>/dev/null | wc -l || echo "0")"
+        echo "================================"
 
   deploy-docs:
     if: github.ref == 'refs/heads/main'
@@ -99,51 +153,43 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: generate-docs
+    needs: build-modern-docs
     
     steps:
-    - name: Deploy to GitHub Pages
+    - name: 🚀 Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v4
 
-  validate-examples:
+  validate-links:
     runs-on: ubuntu-latest
-    needs: generate-docs
+    needs: build-modern-docs
+    continue-on-error: true
     
     steps:
-    - name: Checkout repository
+    - name: 📥 Checkout repository
       uses: actions/checkout@v4
       
-    - name: Download documentation
+    - name: 📥 Download documentation
       uses: actions/download-artifact@v4
       with:
-        name: doxygen-documentation
+        name: modern-documentation
         path: docs/
         
-    - name: Validate documentation examples
+    - name: 🔗 Validate internal links
       run: |
-        echo "🔍 Validating code examples in documentation..."
+        echo "🔍 Validating documentation links..."
         
-        # Check if examples directory is documented
-        if find docs/ -name "*.html" -exec grep -l "examples" {} \; | head -1; then
-          echo "✅ Examples are included in documentation"
-        else
-          echo "⚠️ Examples may not be properly documented"
-        fi
-        
-        # Count Arduino sketches
-        SKETCH_COUNT=$(find examples/ -name "*.ino" | wc -l)
-        echo "📊 Found $SKETCH_COUNT Arduino example sketches"
-        
-        # Validate sketch syntax (basic check)
-        for sketch in examples/*/*.ino; do
-          if [ -f "$sketch" ]; then
-            echo "✅ Checking $sketch"
-            # Basic syntax check - look for setup() and loop()
-            if grep -q "void setup" "$sketch" && grep -q "void loop" "$sketch"; then
-              echo "  ✅ Arduino structure found"
-            else
-              echo "  ⚠️ Missing setup() or loop() function"
+        # Simple link validation for markdown files
+        for file in $(find docs -name "*.md"); do
+          echo "Checking $file..."
+          
+          # Check for broken internal links (basic check)
+          grep -oE '\]\([^)]+\.md\)' "$file" | while read link; do
+            target=$(echo "$link" | sed 's/.*(\([^)]*\)).*/\1/')
+            if [[ "$target" == *".md" ]] && [[ ! -f "docs/$target" ]] && [[ ! -f "$target" ]]; then
+              echo "⚠️ Potential broken link in $file: $target"
             fi
-          fi
+          done
         done
+        
+        echo "✅ Link validation completed"

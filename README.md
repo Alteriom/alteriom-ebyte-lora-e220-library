@@ -3,7 +3,7 @@
 [![Build and Test](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/build-test.yml/badge.svg)](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/build-test.yml)
 [![Release](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/release.yml/badge.svg)](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/release.yml)
 [![Arduino Library Manager](https://img.shields.io/badge/Arduino_Library_Manager-Compatible-blue)](https://www.arduino.cc/reference/en/libraries/)
-[![PlatformIO](https://img.shields.io/badge/PlatformIO-Compatible-orange)](https://platformio.org/lib/show/15400/Alteriom_EByte_LoRa_E220)
+[![PlatformIO](https://img.shields.io/badge/PlatformIO-Compatible-orange)](https://registry.platformio.org/libraries/alteriom/Alteriom_EByte_LoRa_E220)
 
 This is the **Alteriom fork** of the EByte LoRa E220 Series Library, enhanced with modern CI/CD practices, automated releases, and improved package management.
 
@@ -147,13 +147,13 @@ This library features **world-class documentation** with:
 ### 📋 Documentation Resources
 
 - **[📖 API Documentation](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)** - Complete API reference (auto-generated)
-- **[🚀 Quick Start Guide](examples/01_getConfiguration/)** - Get up and running fast
+- **[🚀 Quick Start Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart)** - Get up and running fast
 - **[📚 Examples Library](examples/)** - 8+ complete Arduino sketches  
-- **[🔧 Platform Setup](docs/PLATFORM_SETUP.md)** - Platform-specific configuration
-- **[📋 Configuration Guide](docs/CONFIGURATION.md)** - Device parameter reference
-- **[🛠️ Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues and solutions
-- **[📊 Performance Guide](docs/PERFORMANCE.md)** - Range and power optimization
-- **[🔒 Security Guide](docs/SECURITY.md)** - Encryption and secure communication
+- **[🔧 Platform Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-setup)** - Platform-specific configuration
+- **[📋 Configuration Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** - Device parameter reference
+- **[🛠️ Troubleshooting](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/troubleshooting)** - Common issues and solutions
+- **[📊 Performance Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/performance)** - Range and power optimization
+- **[🔒 Security Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/encryption)** - Encryption and secure communication
 
 ### 🎯 Documentation Features
 
@@ -174,7 +174,7 @@ Documentation is automatically updated on every code change:
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guidelines](docs/CONTRIBUTING.md) for details.
+We welcome contributions! Please see our [Contributing Guidelines](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/contributing) for details.
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -197,8 +197,8 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 - **GitHub Repository**: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library
 - **Original Author's Website**: https://www.mischianti.org
 - **Arduino Library Registry**: [Submit here](https://github.com/arduino/library-registry)
-- **PlatformIO Registry**: [View package](https://platformio.org/lib/show/15400/Alteriom_EByte_LoRa_E220)
+- **PlatformIO Registry**: [View package](https://registry.platformio.org/libraries/alteriom/Alteriom_EByte_LoRa_E220)
 
 ---
 
-**Ready to get started?** Check out our [Quick Start Guide](examples/01_getConfiguration/) and start building your LoRa projects today!
+**Ready to get started?** Check out our [Quick Start Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/quickstart) and start building your LoRa projects today!
