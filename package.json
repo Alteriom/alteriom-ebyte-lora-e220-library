@@ -1,6 +1,6 @@
 {
   "name": "alteriom-ebyte-lora-e220",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Arduino library for EByte LoRa E220 LLCC68 devices with GitHub Copilot and MCP integration. Supports 5-10km range communication.",
   "keywords": [
     "arduino",

@@ -1,5 +1,29 @@
 # Changelog
 
+All notable changes to the Alteriom EByte LoRa E220 Series Library will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.1.1] - 2025-09-29
+
+### Security
+- Updated GitHub Actions to latest secure versions:
+  - arduino/setup-arduino-cli to v2.0.0 (from v1)
+  - actions/setup-python to v5 (from v4) 
+  - arduino/arduino-lint-action to v2 (from v1)
+  - softprops/action-gh-release to v2 (from v1)
+- Replaced deprecated eslint@8 with @eslint/js@9
+- Removed non-existent MCP server dependencies from package.json
+- All npm audit checks now pass with 0 vulnerabilities
+- Added explicit permissions to GitHub Actions workflows
+
+### Fixed
+- Resolved security vulnerabilities in GitHub Actions dependencies
+- Fixed workflow permissions for enhanced security
+
+## [1.1.0] - 2025-09-29log
+
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
