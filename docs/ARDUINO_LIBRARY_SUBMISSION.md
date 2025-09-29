@@ -16,9 +16,9 @@ After each release, our GitHub Actions workflow provides instructions for submis
    Title: Add Alteriom_EByte_LoRa_E220 library
 
    Repository URL: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library
-   Release tag: v1.1.1 (or latest version)
+   Release tag: v1.1.3 (or latest version)
    Library name: Alteriom_EByte_LoRa_E220
-   Version: 1.1.1 (or latest version)
+   Version: 1.1.3 (or latest version)
 
    This is a fork of the EByte LoRa E220 Series Library with enhanced CI/CD, 
    automated releases, and improved Arduino Library Manager compatibility.

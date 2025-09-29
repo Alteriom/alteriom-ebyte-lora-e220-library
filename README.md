@@ -46,6 +46,21 @@ lib_deps =
 2. Extract to your Arduino libraries folder
 3. Restart Arduino IDE
 
+### NPM Package (Node.js/MCP Integration)
+
+**NPM Registry (Public)**:
+```bash
+npm install alteriom-ebyte-lora-e220
+```
+
+**GitHub Packages (Requires Authentication)**:
+```bash
+# Configure registry
+echo "@alteriom:registry=https://npm.pkg.github.com" >> .npmrc
+# Install package
+npm install @alteriom/alteriom-ebyte-lora-e220
+```
+
 ## 🔌 Quick Start
 
 ```cpp

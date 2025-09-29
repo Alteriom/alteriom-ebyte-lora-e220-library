@@ -77,7 +77,7 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
     
-    - name: Setup Node.js
+    - name: Setup Node.js for NPM
       uses: actions/setup-node@v4
       with:
         node-version: '18'
@@ -86,7 +86,14 @@ jobs:
     - name: Install dependencies
       run: npm install --ignore-scripts
     
-    - name: Validate package.json
+    - name: Create NPM package (unscoped)
+      run: |
+        # Create a temporary package.json for NPM (unscoped)
+        cp package.json package.json.github.bak
+        sed 's/"@alteriom\/alteriom-ebyte-lora-e220"/"alteriom-ebyte-lora-e220"/' package.json > package.json.npm
+        cp package.json.npm package.json
+    
+    - name: Validate NPM package.json
       run: |
         echo "📦 Validating NPM package configuration..."
         npm run validate-library || echo "Library validation completed"
@@ -106,6 +113,10 @@ jobs:
       env:
         NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     
+    - name: Restore GitHub package.json
+      run: |
+        cp package.json.github.bak package.json
+    
     - name: NPM Publication Success
       run: |
         VERSION=${GITHUB_REF#refs/tags/v}
@@ -117,14 +128,68 @@ jobs:
         echo "🔗 NPM URL: https://www.npmjs.com/package/alteriom-ebyte-lora-e220"
         echo "📥 Install: npm install alteriom-ebyte-lora-e220"
         echo ""
-        echo "🔧 MCP Integration:"
-        echo "   npm install alteriom-ebyte-lora-e220"
-        echo "   # Use in MCP server configurations"
-        echo ""
-        echo "💡 Documentation:"
+        echo "� Documentation:"
         echo "   - Arduino examples: examples/"
-        echo "   - MCP configuration: .github/mcp-server-config.json"
         echo "   - PlatformIO: platformio.ini"
+        echo "================================"
+
+  # Publish to GitHub Packages
+  github-packages-publish:
+    needs: [tests, release]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js for GitHub Packages
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        registry-url: 'https://npm.pkg.github.com'
+        scope: '@alteriom'
+    
+    - name: Install dependencies
+      run: npm install --ignore-scripts
+    
+    - name: Validate GitHub Package configuration
+      run: |
+        echo "📦 Validating GitHub Package configuration..."
+        echo "Package name: $(grep '"name"' package.json | cut -d'"' -f4)"
+        echo "Registry: https://npm.pkg.github.com"
+        echo "Scope: @alteriom"
+        
+        # Check if package exists
+        echo "� Checking GitHub Package availability..."
+        if npm view @alteriom/alteriom-ebyte-lora-e220 version 2>/dev/null; then
+          echo "✅ Package exists - this will be an update"
+        else
+          echo "🆕 Package doesn't exist - this will be first publication"
+        fi
+    
+    - name: Publish to GitHub Packages
+      run: |
+        echo "📦 Publishing to GitHub Packages..."
+        npm publish
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+    - name: GitHub Packages Publication Success
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "================================"
+        echo "🎉 GitHub Packages Publication Successful!"
+        echo "================================"
+        echo ""
+        echo "📦 Package: @alteriom/alteriom-ebyte-lora-e220@$VERSION"
+        echo "🔗 GitHub URL: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/packages"
+        echo "📥 Install: npm install @alteriom/alteriom-ebyte-lora-e220"
+        echo ""
+        echo "🔧 Installation requires .npmrc configuration:"
+        echo "   echo '@alteriom:registry=https://npm.pkg.github.com' >> .npmrc"
+        echo ""
+        echo "💡 Note: GitHub Packages require authentication for installation"
         echo "================================"
 
   # Publish documentation to GitHub Wiki
@@ -392,7 +457,7 @@ jobs:
         echo "================================"
 
   submission-instructions:
-    needs: [release, npm-publish]
+    needs: [release, npm-publish, github-packages-publish]
     runs-on: ubuntu-latest
     if: always() && needs.release.result == 'success'
     
@@ -429,6 +494,7 @@ jobs:
         echo "💡 Additional Resources:"
         echo "   - GitHub Release: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/releases/tag/${{ github.ref_name }}"
         echo "   - NPM Package: https://www.npmjs.com/package/alteriom-ebyte-lora-e220"
-        echo "   - Documentation: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/blob/main/README_ALTERIOM.md"
-        echo "   - Deployment Guide: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/blob/main/DEPLOYMENT_GUIDE.md"
+        echo "   - GitHub Package: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/packages"
+        echo "   - Documentation: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/blob/main/README.md"
+        echo "   - Deployment Guide: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/blob/main/docs/DEPLOYMENT_GUIDE.md"
         echo "================================"
