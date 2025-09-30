@@ -316,6 +316,8 @@ jobs:
         pip install platformio
     
     - name: Authenticate with PlatformIO Registry
+      env:
+        PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
       run: |
         echo "🔐 Authenticating with PlatformIO Registry..."
         
@@ -329,10 +331,16 @@ jobs:
           exit 1
         fi
         
-        pio account login --token "${{ secrets.PLATFORMIO_AUTH_TOKEN }}"
+        # Verify authentication (uses PLATFORMIO_AUTH_TOKEN environment variable)
+        pio account show || {
+          echo "❌ Authentication failed. Please check PLATFORMIO_AUTH_TOKEN secret."
+          exit 1
+        }
         echo "✅ Successfully authenticated with PlatformIO Registry"
     
     - name: Publish to PlatformIO Registry
+      env:
+        PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
       run: |
         VERSION="${{ needs.validate.outputs.version }}"
         echo "📦 Publishing library version $VERSION to PlatformIO Registry..."
@@ -361,8 +369,6 @@ jobs:
           echo "- Network issues"
           exit 1
         fi
-      env:
-        PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
     
     - name: Publication Success Summary
       run: |
