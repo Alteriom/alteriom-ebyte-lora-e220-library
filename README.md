@@ -28,9 +28,10 @@ We welcome contributions! Please see our [Contributing Guidelines](https://alter
 
 Our GitHub Wiki provides community-driven content that supplements the main documentation:
 
+> 💡 **Note**: For complete documentation and getting started guides, visit our **[📚 Modern Documentation Site](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**
+
 - **[📖 Visit the Wiki](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki)** - Community guides and tutorials
 - **[🤝 Community Guides](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Community-Guides)** - User-contributed content
-- **[🔧 Project Showcase](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/wiki/Project-Showcase)** - Real-world implementations
 - **[📋 Wiki Integration Guide](docs/wiki-integration-guide.md)** - How to contribute to the wiki
 
 > 💡 **Tip**: For the most comprehensive and up-to-date documentation, start with our **[📚 Live Documentation](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)**

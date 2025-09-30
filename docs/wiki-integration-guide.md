@@ -36,7 +36,6 @@ This wiki contains community-driven content that supplements our main documentat
 ### 📋 Wiki Sections
 
 - **[Community Guides](Community-Guides)** - User-contributed tutorials and tips
-- **[Project Showcase](Project-Showcase)** - Real-world implementations  
 - **[Troubleshooting FAQ](Community-FAQ)** - Community Q&A
 - **[Hardware Variants](Hardware-Variants)** - Different E220 module variations
 - **[Regional Setup](Regional-Setup)** - Country-specific configuration guides
@@ -134,10 +133,9 @@ Create these pages in your GitHub Wiki:
 
 1. **Home** - Main wiki landing page (redirects to modern docs)
 2. **Community-Guides** - Index of user-contributed content
-3. **Project-Showcase** - Real-world implementation examples
-4. **Community-FAQ** - Community-driven Q&A
-5. **Hardware-Variants** - Different E220 module information
-6. **Regional-Setup** - Country-specific guides
+3. **Community-FAQ** - Community-driven Q&A
+4. **Hardware-Variants** - Different E220 module information
+5. **Regional-Setup** - Country-specific guides
 
 ### 2. Wiki Sidebar Configuration
 
@@ -149,7 +147,6 @@ Configure the wiki sidebar to include:
 **Community Wiki:**
 - [🏠 Wiki Home](Home)
 - [🤝 Community Guides](Community-Guides)
-- [🔧 Project Showcase](Project-Showcase)
 - [❓ Community FAQ](Community-FAQ)
 - [📱 Hardware Variants](Hardware-Variants)
 - [🌍 Regional Setup](Regional-Setup)
