@@ -26,5 +26,5 @@
   "license": "MIT",
   "frameworks": "arduino",
   "platforms": "*",
-  "headers": ["LoRa_E220.h, EByte_LoRa_E220_library.h"]
+  "headers": ["LoRa_E220.h", "EByte_LoRa_E220_library.h"]
 }

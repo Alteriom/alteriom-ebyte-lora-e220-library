@@ -1,0 +1,401 @@
+name: PlatformIO Registry Publishing
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      force_publish:
+        description: 'Force publish to PlatformIO Registry'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'false'
+          - 'true'
+
+permissions:
+  contents: read
+
+jobs:
+  # Validate library configuration
+  validate:
+    runs-on: ubuntu-latest
+    
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is_valid: ${{ steps.validate.outputs.is_valid }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Extract version
+      id: version
+      run: |
+        if [[ "${{ github.ref_type }}" == "tag" ]]; then
+          VERSION=${GITHUB_REF#refs/tags/v}
+        else
+          VERSION=$(grep '"version"' library.json | cut -d'"' -f4)
+        fi
+        echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+        echo "Detected version: $VERSION"
+    
+    - name: Setup Python for PlatformIO
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install PlatformIO Core
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+    
+    - name: Validate library configuration
+      id: validate
+      run: |
+        echo "🔍 Validating PlatformIO library configuration..."
+        
+        # Check if library.json exists and is valid
+        if [ ! -f "library.json" ]; then
+          echo "❌ library.json not found"
+          echo "is_valid=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+        
+        # Validate JSON syntax
+        if ! python -m json.tool library.json > /dev/null; then
+          echo "❌ library.json has invalid JSON syntax"
+          echo "is_valid=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+        
+        # Validate required fields
+        REQUIRED_FIELDS=("name" "version" "description" "repository" "authors")
+        for field in "${REQUIRED_FIELDS[@]}"; do
+          if ! grep -q "\"$field\"" library.json; then
+            echo "❌ Missing required field: $field"
+            echo "is_valid=false" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+        done
+        
+        # Validate library structure
+        if [ ! -f "LoRa_E220.h" ] && [ ! -f "src/LoRa_E220.h" ]; then
+          echo "❌ Main header file not found"
+          echo "is_valid=false" >> $GITHUB_OUTPUT
+          exit 1
+        fi
+        
+        # Check for examples
+        if [ ! -d "examples" ]; then
+          echo "⚠️  No examples directory found (recommended)"
+        fi
+        
+        echo "✅ Library validation passed"
+        echo "is_valid=true" >> $GITHUB_OUTPUT
+    
+    - name: Display library information
+      run: |
+        echo "================================"
+        echo "📚 Library Information"
+        echo "================================"
+        echo "Name: $(grep '"name"' library.json | cut -d'"' -f4)"
+        echo "Version: ${{ steps.version.outputs.version }}"
+        echo "Description: $(grep '"description"' library.json | cut -d'"' -f4 | head -c 100)..."
+        echo "Repository: $(grep '"url"' library.json | cut -d'"' -f4)"
+        echo "License: $(grep '"license"' library.json | cut -d'"' -f4)"
+        echo "Frameworks: $(grep '"frameworks"' library.json | cut -d'"' -f4)"
+        echo "Platforms: $(grep '"platforms"' library.json | cut -d'"' -f4)"
+        echo "================================"
+
+  # Check if library already exists in registry
+  check-registry:
+    runs-on: ubuntu-latest
+    needs: [validate]
+    if: needs.validate.outputs.is_valid == 'true'
+    
+    outputs:
+      exists: ${{ steps.check.outputs.exists }}
+      current_version: ${{ steps.check.outputs.current_version }}
+      needs_update: ${{ steps.check.outputs.needs_update }}
+    
+    steps:
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install PlatformIO Core
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+    
+    - name: Check if library exists in registry
+      id: check
+      run: |
+        LIBRARY_NAME="Alteriom_EByte_LoRa_E220"
+        NEW_VERSION="${{ needs.validate.outputs.version }}"
+        
+        echo "🔍 Checking PlatformIO Registry for library: $LIBRARY_NAME"
+        
+        # Search for the library
+        if pio lib search "$LIBRARY_NAME" --json-output > search_result.json 2>/dev/null; then
+          if [ -s search_result.json ] && grep -q "\"name\": \"$LIBRARY_NAME\"" search_result.json; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            
+            # Extract current version using grep and sed
+            CURRENT_VERSION=$(grep -A 5 "\"name\": \"$LIBRARY_NAME\"" search_result.json | grep '"name"' | grep -v "\"$LIBRARY_NAME\"" | head -1 | sed 's/.*"name": "\([^"]*\)".*/\1/' || echo "unknown")
+            
+            echo "current_version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+            echo "📦 Library exists in registry with version: $CURRENT_VERSION"
+            
+            # Compare versions
+            if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
+              echo "needs_update=true" >> $GITHUB_OUTPUT
+              echo "🔄 Version update needed: $CURRENT_VERSION → $NEW_VERSION"
+            else
+              echo "needs_update=false" >> $GITHUB_OUTPUT
+              echo "✅ Version $NEW_VERSION already exists"
+            fi
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "needs_update=true" >> $GITHUB_OUTPUT
+            echo "🆕 Library not found in registry - will be first publication"
+          fi
+        else
+          echo "exists=false" >> $GITHUB_OUTPUT
+          echo "needs_update=true" >> $GITHUB_OUTPUT
+          echo "🆕 Library not found in registry - will be first publication"
+        fi
+
+  # Test library compilation
+  test-library:
+    runs-on: ubuntu-latest
+    needs: [validate]
+    if: needs.validate.outputs.is_valid == 'true'
+    
+    strategy:
+      matrix:
+        platform:
+          - "arduino:avr:uno"
+          - "espressif32:esp32:esp32"
+          - "espressif8266:esp8266:nodemcuv2"
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install PlatformIO Core
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+    
+    - name: Install platform
+      run: |
+        PLATFORM="${{ matrix.platform }}"
+        PLATFORM_PACKAGE="${PLATFORM%%:*}"
+        echo "Installing platform: $PLATFORM_PACKAGE"
+        pio platform install "$PLATFORM_PACKAGE"
+    
+    - name: Test library compilation
+      run: |
+        echo "🔧 Testing compilation for ${{ matrix.platform }}"
+        
+        # Create test project
+        mkdir test_project
+        cd test_project
+        
+        # Initialize PlatformIO project
+        pio project init --board "${BOARD}" --project-option "framework=arduino"
+        
+        # Copy library to lib directory
+        mkdir -p lib/Alteriom_EByte_LoRa_E220
+        cp -r ../LoRa_E220.* lib/Alteriom_EByte_LoRa_E220/
+        cp -r ../EByte_LoRa_E220_library.h lib/Alteriom_EByte_LoRa_E220/
+        cp -r ../includes lib/Alteriom_EByte_LoRa_E220/ 2>/dev/null || true
+        
+        # Create simple test sketch
+        cat > src/main.cpp << 'EOF'
+        #include <Arduino.h>
+        #include "LoRa_E220.h"
+        
+        // Simple compilation test
+        LoRa_E220 e220ttl(2, 3, 4, 5, 6);
+        
+        void setup() {
+          Serial.begin(9600);
+          // Test that library compiles
+        }
+        
+        void loop() {
+          // Empty loop
+        }
+        EOF
+        
+        # Try to compile
+        if pio run; then
+          echo "✅ Compilation successful for ${{ matrix.platform }}"
+        else
+          echo "❌ Compilation failed for ${{ matrix.platform }}"
+          exit 1
+        fi
+      env:
+        BOARD: ${{ matrix.platform == 'arduino:avr:uno' && 'uno' || matrix.platform == 'espressif32:esp32:esp32' && 'esp32' || 'nodemcuv2' }}
+
+  # Publish to PlatformIO Registry
+  publish:
+    runs-on: ubuntu-latest
+    needs: [validate, check-registry, test-library]
+    if: |
+      always() && 
+      needs.validate.outputs.is_valid == 'true' && 
+      needs.test-library.result == 'success' &&
+      (needs.check-registry.outputs.needs_update == 'true' || github.event.inputs.force_publish == 'true')
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Install PlatformIO Core
+      run: |
+        python -m pip install --upgrade pip
+        pip install platformio
+    
+    - name: Authenticate with PlatformIO Registry
+      run: |
+        echo "🔐 Authenticating with PlatformIO Registry..."
+        
+        if [ -z "${{ secrets.PLATFORMIO_AUTH_TOKEN }}" ]; then
+          echo "❌ PLATFORMIO_AUTH_TOKEN secret not set!"
+          echo ""
+          echo "To set up authentication:"
+          echo "1. Get your auth token: pio account token"
+          echo "2. Add it as a repository secret named 'PLATFORMIO_AUTH_TOKEN'"
+          echo "3. Re-run this workflow"
+          exit 1
+        fi
+        
+        pio account login --token "${{ secrets.PLATFORMIO_AUTH_TOKEN }}"
+        echo "✅ Successfully authenticated with PlatformIO Registry"
+    
+    - name: Publish to PlatformIO Registry
+      run: |
+        VERSION="${{ needs.validate.outputs.version }}"
+        echo "📦 Publishing library version $VERSION to PlatformIO Registry..."
+        
+        # Publish the library
+        if pio package publish; then
+          echo "✅ Successfully published to PlatformIO Registry!"
+          
+          # Wait a moment for registry to update
+          sleep 10
+          
+          # Verify publication
+          LIBRARY_NAME="Alteriom_EByte_LoRa_E220"
+          if pio lib search "$LIBRARY_NAME" --json-output | grep -q "$VERSION"; then
+            echo "✅ Verification: Library version $VERSION is now available in registry"
+          else
+            echo "⚠️  Publication successful but version not yet visible in search (may take a few minutes)"
+          fi
+        else
+          echo "❌ Failed to publish to PlatformIO Registry"
+          echo ""
+          echo "Common causes:"
+          echo "- Version already exists"
+          echo "- Authentication issues"
+          echo "- Library validation errors"
+          echo "- Network issues"
+          exit 1
+        fi
+      env:
+        PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
+    
+    - name: Publication Success Summary
+      run: |
+        VERSION="${{ needs.validate.outputs.version }}"
+        LIBRARY_NAME="Alteriom_EByte_LoRa_E220"
+        
+        echo "================================"
+        echo "🎉 PlatformIO Publication Successful!"
+        echo "================================"
+        echo ""
+        echo "📦 Library: $LIBRARY_NAME@$VERSION"
+        echo "🔗 Registry: https://registry.platformio.org/libraries/alteriom/$LIBRARY_NAME"
+        echo ""
+        echo "📥 Installation Commands:"
+        echo "   platformio.ini: lib_deps = alteriom/$LIBRARY_NAME@^$VERSION"
+        echo "   CLI: pio lib install alteriom/$LIBRARY_NAME"
+        echo ""
+        echo "🔍 Search: pio lib search $LIBRARY_NAME"
+        echo ""
+        echo "📚 Documentation:"
+        echo "   - GitHub: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library"
+        echo "   - Examples: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/tree/main/examples"
+        echo "   - Arduino Library Manager: Search 'Alteriom_EByte_LoRa_E220'"
+        echo ""
+        echo "✨ Features:"
+        echo "   - Long Range Communication (5-10km)"
+        echo "   - Multi-Platform Support (Arduino, ESP32, ESP8266, STM32, Pi Pico)"
+        echo "   - Wake-on-Radio (WOR) support"
+        echo "   - Comprehensive examples and documentation"
+        echo "================================"
+
+  # Notify other systems
+  notify:
+    runs-on: ubuntu-latest
+    needs: [publish]
+    if: needs.publish.result == 'success'
+    
+    steps:
+    - name: Update README badge status
+      run: |
+        echo "📋 PlatformIO Registry publication completed"
+        echo "Badge URLs should now show updated status:"
+        echo "- https://registry.platformio.org/libraries/alteriom/Alteriom_EByte_LoRa_E220"
+        echo "- Library is now available for installation via PlatformIO"
+    
+    - name: Post-publication checklist
+      run: |
+        echo "================================"
+        echo "📋 Post-Publication Checklist"
+        echo "================================"
+        echo ""
+        echo "✅ Library published to PlatformIO Registry"
+        echo "🔄 Next steps (manual):"
+        echo ""
+        echo "1. 📖 Update documentation:"
+        echo "   - Verify installation instructions in README"
+        echo "   - Update version numbers if needed"
+        echo ""
+        echo "2. 🧪 Test installation:"
+        echo "   - Create new PlatformIO project"
+        echo "   - Add lib_deps = alteriom/Alteriom_EByte_LoRa_E220"
+        echo "   - Verify examples compile"
+        echo ""
+        echo "3. 📢 Announce release:"
+        echo "   - GitHub Releases notes"
+        echo "   - Community forums/discord"
+        echo "   - Social media"
+        echo ""
+        echo "4. 🔗 Cross-platform verification:"
+        echo "   - Arduino Library Manager (if not already done)"
+        echo "   - NPM package (if not already done)"
+        echo "   - GitHub Packages (if not already done)"
+        echo ""
+        echo "5. 📊 Monitor:"
+        echo "   - Registry download statistics"
+        echo "   - User feedback and issues"
+        echo "   - Community adoption"
+        echo "================================"
