@@ -345,8 +345,8 @@ jobs:
         VERSION="${{ needs.validate.outputs.version }}"
         echo "📦 Publishing library version $VERSION to PlatformIO Registry..."
         
-        # Publish the library
-        if pio package publish; then
+        # Publish the library (non-interactive mode for CI/CD)
+        if pio package publish --non-interactive; then
           echo "✅ Successfully published to PlatformIO Registry!"
           
           # Wait a moment for registry to update
