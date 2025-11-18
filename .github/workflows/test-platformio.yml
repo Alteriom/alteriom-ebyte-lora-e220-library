@@ -1,4 +1,6 @@
 name: Test PlatformIO Library
+permissions:
+  contents: read
 
 on:
   workflow_dispatch:
