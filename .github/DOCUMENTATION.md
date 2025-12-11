@@ -58,6 +58,9 @@ Our modern, interactive documentation provides:
 - **[Platform Overview](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-setup)** - All supported platforms (STM32, Pi Pico, SAMD)
 
 #### LLCC68 Chipset Information
+For detailed technical specifications, see the [README Hardware Features](../README.md#-features).
+
+Quick reference:
 - **Frequency bands:** 433MHz, 868MHz, 915MHz variants
 - **Range:** 5-10km line-of-sight
 - **Data rates:** 1.2kbps to 62.5kbps
