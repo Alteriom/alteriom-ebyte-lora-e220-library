@@ -107,7 +107,7 @@ jobs:
         
     - name: 🔧 Setup GitHub Pages
       if: github.ref == 'refs/heads/main'
-      uses: actions/configure-pages@v4
+      uses: actions/configure-pages@v5
       
     - name: 📤 Upload documentation to Pages
       if: github.ref == 'refs/heads/main'
