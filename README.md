@@ -199,6 +199,68 @@ This library features **world-class documentation** built with modern web techno
 | ⚙️ **Configuration** | Device setup guide | **[🔧 Config](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** |
 | 🆘 **Troubleshooting** | Solutions to common issues | **[🛠️ Help](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/troubleshooting)** |
 
+---
+
+### 🎯 LoRa-Specific Documentation
+
+#### Wake-on-Radio (WOR) Power Management
+Maximize battery life in your LoRa projects with Wake-on-Radio mode:
+
+- **[📡 WOR Documentation](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/wor)** - Complete guide to power-saving techniques
+- **[💤 WOR Example](examples/06_sendWORMessage/)** - Send messages to sleeping devices
+- **[⏰ Wake from WOR](examples/06_wakeUPLoRaFromWOR/)** - Receive and handle WOR messages
+- **Power Savings**: Reduce power consumption from 100mA to <10μA in sleep mode
+- **Use Cases**: Battery-powered sensors, remote monitoring, solar-powered nodes
+
+#### Range Optimization Strategies
+Achieve maximum communication range (5-10km) with proper configuration:
+
+- **[📏 Range Optimization Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration#range-optimization)** - Maximize transmission distance
+- **[🔧 Configuration Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/configuration)** - Optimize power, speed, and channel settings
+- **[📶 Wiring Guide](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/wiring)** - Proper antenna connections
+- **Key Factors:**
+  - **Transmission Power**: Up to 30dBm (1W) configurable
+  - **Air Data Rate**: Lower rates = longer range (1.2kbps to 62.5kbps)
+  - **Antenna Quality**: Use proper 50Ω antennas matched to frequency
+  - **Line of Sight**: Clear path significantly improves range
+  - **Frequency Band**: Choose appropriate band (433MHz, 868MHz, 915MHz)
+
+#### Communication Modes
+Choose the right mode for your application:
+
+- **[🔄 Transparent Mode](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/transparent-mode)** - Simple peer-to-peer communication
+  - No address configuration needed
+  - Broadcast to all devices on same channel
+  - Best for: Simple point-to-point links
+
+- **[🎯 Fixed Mode](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/fixed-mode)** - Addressed messaging with channel control
+  - Target specific devices by address
+  - Control channel and power per message
+  - Best for: Complex networks, multiple nodes
+
+- **[📢 Broadcast Mode](examples/07_sendBroadcastMessage/)** - One-to-many communication
+  - Send to all devices simultaneously
+  - Efficient for sensor networks
+  - Best for: Environmental monitoring, alerts
+
+#### Multi-Platform Support
+Platform-specific guides for seamless integration:
+
+- **[🔷 Arduino Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-arduino)** - Arduino UNO, Nano, Mega
+- **[🔶 ESP32 Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-esp32)** - ESP32 with hardware serial
+- **[🔸 ESP8266 Setup](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-esp8266)** - ESP8266 with software serial
+- **[📋 All Platforms](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/platform-setup)** - Complete platform guide (STM32, Pi Pico, SAMD)
+
+#### LLCC68 Chipset Features
+- **Frequency Bands:** 433MHz, 868MHz, 915MHz (region-specific)
+- **Range:** 5-10km line-of-sight, 1-2km urban environments
+- **Data Rates:** 1.2kbps to 62.5kbps (configurable)
+- **Power Output:** Up to 30dBm (1W) maximum
+- **Interface:** UART (3.3V/5V compatible with level shifter)
+- **Current:** 100mA TX, 15mA RX, <10μA sleep mode
+
+---
+
 ### 📚 Documentation Highlights
 
 - **[📖 Complete API Reference](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/api-reference)** - Every method documented with examples
@@ -226,6 +288,11 @@ Documentation is automatically updated on every code change:
 [![Documentation](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/documentation.yml/badge.svg)](https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/actions/workflows/documentation.yml)
 
 **View Latest**: [https://alteriom.github.io/EByte_LoRa_E220_Series_Library/](https://alteriom.github.io/EByte_LoRa_E220_Series_Library/)
+
+### 📑 Complete Documentation Index
+
+For a comprehensive list of all documentation resources, including LoRa-specific guides, see:
+**[📚 Documentation Index](.github/DOCUMENTATION.md)** - Complete documentation reference with categorized links
 
 ## 🤝 Contributing
 
