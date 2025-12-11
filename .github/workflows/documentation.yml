@@ -116,7 +116,7 @@ jobs:
         path: ./docs
         
     - name: 📦 Archive documentation artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: modern-documentation
         path: docs/
