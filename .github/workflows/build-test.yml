@@ -29,7 +29,7 @@ jobs:
           - examples/01_setConfiguration/01_setConfiguration.ino
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Setup Arduino CLI
       uses: arduino/setup-arduino-cli@v2.0.0
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Set up Python
       uses: actions/setup-python@v6
@@ -71,7 +71,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     
     - name: Validate Arduino library format
       uses: arduino/arduino-lint-action@v2
