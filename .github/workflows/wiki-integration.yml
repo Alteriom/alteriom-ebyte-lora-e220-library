@@ -226,7 +226,7 @@ jobs:
         echo ""
         
     - name: 📦 Archive Wiki Templates
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: wiki-templates
         path: wiki-templates/
