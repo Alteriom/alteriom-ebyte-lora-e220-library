@@ -45,7 +45,7 @@ jobs:
         echo "Generated release notes for version $VERSION"
     
     - name: Create Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: ${{ github.ref_name }}
         name: "Alteriom EByte LoRa E220 v${{ steps.release_notes.outputs.VERSION }}"
