@@ -55,3 +55,6 @@ yarn.lock
 
 # MCP server cache
 .mcp-cache/bin/
+
+# Local tool binaries (CI installs arduino-cli with arduino/setup-arduino-cli)
+/bin/
