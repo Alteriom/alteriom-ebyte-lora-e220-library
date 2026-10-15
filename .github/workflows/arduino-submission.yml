@@ -31,7 +31,7 @@ jobs:
         echo "🔍 Checking if library is already in Arduino Library Registry..."
         
         # Check if library is already in Arduino registry
-        REPO_URL="https://github.com/Alteriom/EByte_LoRa_E220_Series_Library"
+        REPO_URL="https://github.com/Alteriom/alteriom-ebyte-lora-e220-library"
         
         # Download repositories.txt and check if our repo is listed
         if curl -s https://raw.githubusercontent.com/arduino/library-registry/main/repositories.txt | grep -q "$REPO_URL"; then
@@ -58,7 +58,7 @@ jobs:
         cat > issue_body.md << 'EOF'
         Arduino Library Registry Submission Request
         
-        Repository URL: https://github.com/Alteriom/EByte_LoRa_E220_Series_Library
+        Repository URL: https://github.com/Alteriom/alteriom-ebyte-lora-e220-library
         Library name: Alteriom_EByte_LoRa_E220
         Latest release: Check releases page for current version
         
@@ -88,7 +88,7 @@ jobs:
         
         Manual Submission Required:
         1. Fork: https://github.com/arduino/library-registry/fork
-        2. Edit repositories.txt: Add https://github.com/Alteriom/EByte_LoRa_E220_Series_Library
+        2. Edit repositories.txt: Add https://github.com/Alteriom/alteriom-ebyte-lora-e220-library
         3. Create PR: Submit pull request to arduino/library-registry
         4. Monitor: Watch for Arduino team approval
         
@@ -101,7 +101,7 @@ jobs:
         echo "1. Go to: https://github.com/arduino/library-registry"
         echo "2. Fork the repository"
         echo "3. Add this URL to repositories.txt:"
-        echo "   https://github.com/Alteriom/EByte_LoRa_E220_Series_Library"
+        echo "   https://github.com/Alteriom/alteriom-ebyte-lora-e220-library"
         echo "4. Create pull request"
     
     - name: Check Arduino Indexer Status
@@ -110,7 +110,7 @@ jobs:
         echo "📊 Checking Arduino Library Manager indexer status..."
         
         # Check Arduino indexer logs
-        LOGS_URL="http://downloads.arduino.cc/libraries/logs/github.com/Alteriom/EByte_LoRa_E220_Series_Library/"
+        LOGS_URL="http://downloads.arduino.cc/libraries/logs/github.com/Alteriom/alteriom-ebyte-lora-e220-library/"
         
         echo "🔍 Arduino Indexer Logs: $LOGS_URL"
         echo ""
@@ -138,7 +138,7 @@ jobs:
         if [ "${{ steps.check_submission.outputs.already_submitted }}" == "true" ]; then
           echo "✅ Library is already in Arduino Library Registry"
           echo "🔄 New releases are automatically indexed every hour"
-          echo "📊 Monitor status: http://downloads.arduino.cc/libraries/logs/github.com/Alteriom/EByte_LoRa_E220_Series_Library/"
+          echo "📊 Monitor status: http://downloads.arduino.cc/libraries/logs/github.com/Alteriom/alteriom-ebyte-lora-e220-library/"
         else
           echo "📝 Manual submission required"
           echo "🔧 Steps: Fork arduino/library-registry → Edit repositories.txt → Create PR"

@@ -31,16 +31,16 @@
     }
   ],
   "license": "MIT",
-  "homepage": "https://github.com/Alteriom/EByte_LoRa_E220_Series_Library",
+  "homepage": "https://github.com/Alteriom/alteriom-ebyte-lora-e220-library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Alteriom/EByte_LoRa_E220_Series_Library.git"
+    "url": "https://github.com/Alteriom/alteriom-ebyte-lora-e220-library.git"
   },
   "publishConfig": {
     "@alteriom:registry": "https://npm.pkg.github.com"
   },
   "bugs": {
-    "url": "https://github.com/Alteriom/EByte_LoRa_E220_Series_Library/issues"
+    "url": "https://github.com/Alteriom/alteriom-ebyte-lora-e220-library/issues"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
