@@ -43,7 +43,7 @@
     "url": "https://github.com/Alteriom/alteriom-ebyte-lora-e220-library/issues"
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
+    "@eslint/js": "^10.0.1",
     "prettier": "^3.0.0"
   },
   "scripts": {
