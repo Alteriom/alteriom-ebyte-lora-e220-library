@@ -1,6 +1,6 @@
 ---
 verified_at: 2026-10-15
-verified_commit: 6d202404f514ab13e80a302ead766aca96e29afd
+verified_commit: b97a85eaa226bdf703382477db5769737fb0f14f
 ---
 
 # Releasing — a person tags, the workflows publish
@@ -32,6 +32,6 @@ So the next release is 1.1.7 or later: PlatformIO already has 1.1.6, and a regis
 
 ## Things that are easy to get wrong
 
-- The manifests' `url`, `repository` and `homepage` still name the repository's old name, `Alteriom/EByte_LoRa_E220_Series_Library`; GitHub redirects it, the Pages site does not (`README.md` links the old Pages address). The submission check in `arduino-submission.yml` searches the registry for the old URL too.
+- The repository was renamed from `Alteriom/EByte_LoRa_E220_Series_Library`. The manifests' `url`, `repository` and `homepage`, the Pages links in `README.md` and the registry search in `arduino-submission.yml` name the current one; GitHub redirects the old name, Pages does not, so a link to the old Pages address is a 404.
 - The scoped name in `package.json` is the GitHub Packages one (`.npmrc` points `@alteriom` at GitHub's registry); `release.yml` rewrites it to the unscoped name only for the npm step and restores it after.
 - Every tag between v1.1.1 and v1.1.6 except v1.1.5 failed `release.yml` (the run list of that workflow); read the log of the last tag run before assuming the workflow still works, and fix it on `main` before tagging (the `ci-red` route).

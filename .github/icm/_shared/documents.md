@@ -1,6 +1,6 @@
 ---
 verified_at: 2026-10-15
-verified_commit: 6d202404f514ab13e80a302ead766aca96e29afd
+verified_commit: b97a85eaa226bdf703382477db5769737fb0f14f
 ---
 
 # Documents — what a person reads here, and who owns its facts
@@ -36,9 +36,6 @@ The agent-facing files are `AGENTS.md` (the entry), this folder and `.github/cop
 ## Known drift
 
 - **`SECURITY.md`** is a template from another project: it names a different package, a placeholder reporting address and a 1.0.x line. Not pinned until a person rewrites it.
-- **`README.md`** links the documentation site at the repository's old name; GitHub Pages serves it under `alteriom-ebyte-lora-e220-library` and does not redirect. It offers installation from Arduino Library Manager, where the library is not listed ([release.md](release.md)). Its "Building and Testing" builds "all platforms" with PlatformIO, but `platformio.ini` defines only the `native` test environment.
-- **The manifests** (`library.properties`, `library.json`, `package.json`) name the old repository URL; GitHub redirects it.
 - **Duplicates**: `docs/CHANGELOG.md` and `docs/CONTRIBUTING.md` are copies the site shows; the root files are the owners, and `docs/CHANGELOG.md` already lacks the root's "Unreleased" section.
 - **`.github/copilot-instructions.md`** said version 1.0.8 and "use library manager"; corrected in this change.
 - **Status pages** from the September 2025 setup, superseded by the workflows and [release.md](release.md), not pinned: at the root, ARDUINO_AUTOMATION_SUMMARY, RELEASE_SUMMARY and TRIGGER_RELEASE; under `docs/`, ALL_ISSUES_RESOLVED, CONSTRUCTOR_FIX_PROGRESS, DOCUMENTATION_IMPROVEMENTS, FINAL_PUBLISHING_FIXES, PLATFORMIO_AUTHENTICATION_FIX, PLATFORMIO_SETUP_COMPLETE, QUICK_PLATFORMIO_PUBLISH, YAML_SYNTAX_FIX and DEPLOYMENT_GUIDE (written for v1.0.0); under `.github/`, README-COPILOT, USAGE-EXAMPLE, DOCUMENTATION and RELEASE_TEMPLATE. `.github/mcp-server-config.json` describes tooling no workflow uses, and `.github/copilot-mcp.json` names a server `app.js` this repository does not have.
-- **`wiki`** is a submodule entry with no `.gitmodules` behind it, so `git submodule update` cannot fetch it; the wiki itself is written by `update-wiki.yml`.

@@ -603,7 +603,7 @@
     },
     {
       "id": "shared-build-and-test.md",
-      "revision": 1,
+      "revision": 3,
       "kind": "fact",
       "layer": "L3",
       "state": "accepted",
@@ -617,77 +617,87 @@
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/arduino-submission.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/build-test.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/documentation.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/icm-check.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/platformio-publish.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/release.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/test-platformio.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/update-wiki.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/wiki-integration.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
+        },
+        {
+          "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
+          "path": ".gitignore",
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "LoRa_E220.cpp",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
-        },
-        {
-          "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
-          "path": "LoRa_E220.h",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "README.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "library.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
+        },
+        {
+          "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
+          "path": "platformio.ini",
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "scripts/validate-library.sh",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
-          "path": "test/test_configuration.cpp",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "path": "test/library_source.cpp",
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
+        },
+        {
+          "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
+          "path": "test/test_lora_e220.cpp",
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         }
       ]
     },
@@ -743,7 +753,7 @@
     },
     {
       "id": "shared-documents.md",
-      "revision": 1,
+      "revision": 2,
       "kind": "fact",
       "layer": "L3",
       "state": "accepted",
@@ -757,233 +767,228 @@
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/copilot-instructions.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/copilot-mcp.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/mcp-server-config.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/arduino-submission.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/build-test.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/documentation.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/platformio-publish.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/update-wiki.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "CHANGELOG.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "CONTRIBUTING.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "LoRa_E220.cpp",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "LoRa_E220.h",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "README.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "SECURITY.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/ARDUINO_LIBRARY_SUBMISSION.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/CHANGELOG.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/CONTRIBUTING.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/PLATFORMIO_PUBLISHING_GUIDE.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/_navbar.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/_sidebar.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/api-reference.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/building.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/configuration.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/doxygen-api.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/examples.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/faq.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/fixed-mode.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/index.html",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/installation.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/original-documentation.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/platform-arduino.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/platform-esp32.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/platform-esp8266.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/platform-setup.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/quickstart.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/transparent-mode.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/troubleshooting.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/wiring.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/wor.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "examples/01_getConfiguration/01_getConfiguration.ino",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "includes/statesNaming.h",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "library.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "library.properties",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
-        },
-        {
-          "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
-          "path": "package.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "platformio.ini",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         }
       ]
     },
     {
       "id": "shared-release.md",
-      "revision": 1,
+      "revision": 2,
       "kind": "fact",
       "layer": "L3",
       "state": "accepted",
@@ -997,67 +1002,67 @@
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/arduino-submission.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/build-test.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/platformio-publish.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".github/workflows/release.yml",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": ".npmrc",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "CHANGELOG.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "LoRa_E220.h",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "README.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "docs/ARDUINO_LIBRARY_SUBMISSION.md",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "library.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "library.properties",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "package.json",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         },
         {
           "repo": "Alteriom/alteriom-ebyte-lora-e220-library",
           "path": "scripts/update-version.sh",
-          "commit": "6d202404f514ab13e80a302ead766aca96e29afd"
+          "commit": "b97a85eaa226bdf703382477db5769737fb0f14f"
         }
       ]
     }
@@ -1103,8 +1108,7 @@
       "do_not_load": [
         ".github/icm/02-release/",
         ".github/icm/03-deps/",
-        "resources/",
-        "bin/"
+        "resources/"
       ],
       "outputs": [
         ".github/icm/01-fix/stages/01_reproduce/output/reproduction.md"
@@ -1132,8 +1136,7 @@
         ".github/icm/02-release/",
         ".github/icm/03-deps/",
         ".github/icm/_shared/documents.md",
-        "resources/",
-        "bin/"
+        "resources/"
       ],
       "outputs": [
         ".github/icm/01-fix/stages/02_fix/output/change.md"
@@ -1186,8 +1189,7 @@
         ".github/icm/01-fix/",
         ".github/icm/03-deps/",
         ".github/icm/_shared/documents.md",
-        "resources/",
-        "bin/"
+        "resources/"
       ],
       "outputs": [
         ".github/icm/02-release/stages/01_plan/output/plan.md"
@@ -1263,8 +1265,7 @@
         ".github/icm/01-fix/",
         ".github/icm/02-release/",
         ".github/icm/_shared/documents.md",
-        "resources/",
-        "bin/"
+        "resources/"
       ],
       "outputs": [
         ".github/icm/03-deps/stages/01_review/output/review.md"

@@ -12,7 +12,7 @@ Alteriom's fork of Renzo Mischianti's Arduino library for EBYTE E220 LoRa module
 | `examples/`, `test/` | one sketch per feature (`NN_name/NN_name.ino`); the native Unity tests (`pio test -e native`) |
 | `docs/` | the Docsify site published to GitHub Pages — indexed in [documents.md](.github/icm/_shared/documents.md) |
 | `scripts/`, `.github/workflows/` | version and validation scripts; CI, release, registry publishing, docs and wiki workflows, `icm-check.yml` |
-| `resources/`, `bin/` | the EBYTE manuals and pictures; a committed `arduino-cli` binary. Never read either |
+| `resources/` | the EBYTE manuals and pictures. Never read it |
 | [`.github/icm/_shared/`](.github/icm/_shared/CONTEXT.md) | what every job below draws on, one file per question |
 | [`.github/icm/01-fix/`](.github/icm/01-fix/CLAUDE.md) | fix a defect in the library, an example or a workflow |
 | [`.github/icm/02-release/`](.github/icm/02-release/CLAUDE.md) | cut a version and see it into every registry (a person tags it) |

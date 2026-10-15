@@ -1,6 +1,6 @@
 ---
 verified_at: 2026-10-15
-verified_commit: 6d202404f514ab13e80a302ead766aca96e29afd
+verified_commit: b97a85eaa226bdf703382477db5769737fb0f14f
 ---
 
 # Build, test, and what counts as evidence
@@ -18,7 +18,7 @@ pio test -e native                                      # the Unity tests in tes
 arduino-lint --library-manager update --compliance strict   # the layout and manifests, as the lint job does
 ```
 
-The ESP32 and ESP8266 cores need their board-manager URLs (the "Install Arduino platforms" step). Use your own `arduino-cli`; the copy committed under `bin/` is not what CI uses (`arduino/setup-arduino-cli` installs 1.0.4). `scripts/validate-library.sh` checks the manifests and the file layout before a release.
+The ESP32 and ESP8266 cores need their board-manager URLs (the "Install Arduino platforms" step). Use your own `arduino-cli` (CI installs 1.0.4 with `arduino/setup-arduino-cli`); `/bin/` is ignored for a local copy (`.gitignore`). `scripts/validate-library.sh` checks the manifests and the file layout before a release.
 
 ## What CI runs, and when
 
@@ -37,5 +37,5 @@ CodeQL runs as GitHub's default setup, weekly, not from a workflow here.
 
 ## Evidence
 
-- **The native test does not test the library.** `test/test_configuration.cpp` declares its own mock `Configuration`, `ResponseStatus` and `String` and tests those; it never includes `LoRa_E220.h`. A green `pio test -e native` proves the test harness, not a change to `LoRa_E220.cpp`.
+- **The native test compiles the library itself.** `test/library_source.cpp` includes `LoRa_E220.cpp` on top of the minimal Arduino core in `test/native_shim/` (`platformio.ini`, `env:native`), and `test/test_lora_e220.cpp` drives it against a fake module on the UART. A green `pio test -e native` proves the configuration and register-read logic, not radio behaviour or a platform `#if`.
 - What does prove a change: every sketch it touches compiling for AVR, ESP32 and ESP8266 (more boards if it touches a platform `#if`), `arduino-lint` clean, and for behaviour on the air a run on a module with the serial output and the module variant (E220-400T22D, -900T30D, ...). Say which of these you have; if there is no module run, say so.
