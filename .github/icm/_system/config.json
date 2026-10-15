@@ -1,0 +1,14 @@
+{
+  "standard": "1.1.0",
+  "repository": "Alteriom/alteriom-ebyte-lora-e220-library",
+  "project": "alteriom-ebyte-lora-e220-library",
+  "entry": "AGENTS.md",
+  "pointer": "CLAUDE.md",
+  "review_days": 90,
+  "sub_entries": [],
+  "instruction_files": [
+    ".github/copilot-instructions.md"
+  ],
+  "documents_index": "_shared/documents.md",
+  "document_id_prefix": "doc-"
+}
